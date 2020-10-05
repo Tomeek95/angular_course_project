@@ -19,4 +19,12 @@ export class ShoppingListService {
     //this way we are working on the same array
     //because of the slice() method, it returns a new array every time
   }
+
+  addIngredients(ingredients: Ingredient[]){
+    this.ingredients.push(...ingredients);
+    this.ingredientsChanged.emit(this.ingredients.slice());
+    /* for(let ingredient of ingredients){
+      this.addIngredient(ingredient);
+    } */
+  }
 }
