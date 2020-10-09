@@ -27,6 +27,13 @@ export class RecipeService {
 
   constructor(private shoppingListService: ShoppingListService) {}
 
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipeChanged.next(this.recipes.slice());
+    //this is a crucial step to inform the app that a change has happened,
+    //and this way we are sending a copy
+  }
+
   getRecipes() {
     return this.recipes.slice();
   }
