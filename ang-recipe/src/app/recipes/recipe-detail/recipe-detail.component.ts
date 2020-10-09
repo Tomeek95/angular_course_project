@@ -1,5 +1,5 @@
 import { Recipe } from './../recipe.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { RecipeService } from '../recipe.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
@@ -9,6 +9,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrls: ['./recipe-detail.component.css'],
 })
 export class RecipeDetailComponent implements OnInit {
+  @ViewChild('imagePath', { static: true })
   recipe: Recipe;
   id: number;
 
@@ -29,7 +30,12 @@ export class RecipeDetailComponent implements OnInit {
     this.recipseService.addingIngredientToShoppingList(this.recipe.ingredients);
   }
   onEditRecipe() {
-    this.router.navigate(['edit'], {relativeTo: this.route});
+    this.router.navigate(['edit'], { relativeTo: this.route });
     //this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});
+  }
+  onDeleteRecipe() {
+    this.recipseService.deleteRecipe(this.id);
+    this.router.navigate(['recipes']);
+    console.log('recipe deleted');
   }
 }
